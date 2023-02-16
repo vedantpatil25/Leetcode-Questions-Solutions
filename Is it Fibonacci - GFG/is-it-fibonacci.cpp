@@ -12,23 +12,23 @@ class Solution {
   public:
     long long solve(int N, int K, vector<long long> GeekNum)
     {
-        if(K>=N)
+        if(K >= N)
         {
             return GeekNum[N-1];
         }
         
-        vector<long long>ans(N,0);
-        long long sum=0;
-        for(int i=0;i<K;i++)
+        vector<long long>ans(N, 0);
+        long long sum = 0;
+        for(int i = 0 ; i < K ; i++)
         {
-            sum+=GeekNum[i];
-            ans[i]=GeekNum[i];
+            sum += GeekNum[i];
+            ans[i] = GeekNum[i];
         }
-        ans[K]=sum;
+        ans[K] = sum;
         
-        for(int i=K+1;i<N;i++)
+        for(int i = K+1 ; i < N; i++)
         {
-            sum=2*sum-ans[i-K-1];
+            sum += sum - ans[i-K-1];
             ans[i] = sum;
         }
         int temp = ans.size(); 
