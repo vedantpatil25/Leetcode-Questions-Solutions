@@ -10,29 +10,29 @@ using namespace std;
 
 class Solution {
   public:
-    long long solve(int N, int K, vector<long long> GeekNum)
-    {
+    long long solve(int N, int K, vector<long long> GeekNum) {
+        // code here
         if(K >= N)
         {
             return GeekNum[N-1];
         }
         
-        vector<long long>ans(N, 0);
+        vector<long long >ans(N,0);
         long long sum = 0;
         for(int i = 0 ; i < K ; i++)
         {
             sum += GeekNum[i];
             ans[i] = GeekNum[i];
         }
-        ans[K] = sum;
-        
-        for(int i = K+1 ; i < N; i++)
+        ans[K]=sum;
+        for(int i = K+1 ; i < N ; i++)
         {
-            sum += sum - ans[i-K-1];
-            ans[i] = sum;
+            sum +=ans[i-1]-ans[i-K-1];
+            ans[i]=sum;
         }
-        int temp = ans.size(); 
-        return ans[temp-1];
+        return ans[N-1];
+        
+        
     }
 };
 
