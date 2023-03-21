@@ -5,26 +5,28 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
     public:
-     vector<int> findMean(int arr[],int queries[],int n,int q)
+    vector<int> findMean(int arr[],int queries[],int n,int q)
     {
-        vector<int>v;
-        int j=-1;
-        while(q)
+        // Complete the function
+        vector<int> ans;
+        int prefixSum[n];
+        prefixSum[0]=arr[0];
+        for(int i=1;i<n;i++)
         {
-            j+=1;
-            int l=queries[j];
-            j+=1;
-            int r=queries[j];
-            int sum=0;
-            int count=r-l+1;
-            for(int i=l;i<=r;i++)
-            {
-                sum=sum+arr[i];
-            }
-            v.push_back(sum/count);
-            q=q-2;
+            prefixSum[i]=prefixSum[i-1]+arr[i];
         }
-        return v;
+        
+        for(int i=0;i<q;i=i+2)
+        {
+            int sum=0;
+            int l=queries[i];
+            int r=queries[i+1];
+            if(l==0) sum=prefixSum[r];
+            else sum=prefixSum[r]-prefixSum[l-1];
+            int mean=sum/(r-l+1);
+            ans.push_back(mean);
+        }
+        return ans;
     }
 };
 
