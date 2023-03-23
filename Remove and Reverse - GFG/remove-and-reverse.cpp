@@ -17,16 +17,15 @@ class Solution {
         unordered_map<char, int>mp;
         for(auto x: s) mp[x]++;
         bool flag = true;
-        int cnt = 0;
         
         while(l<=r)
         {
-            if(cnt%2 == 0)
+            if(flag)
             {
-                if(mp[s[l]] != 1)
+                if(mp[s[l]] > 1)
                 {
                     mp[s[l]]--;
-                    cnt++;
+                    flag = false;
                     
                 }
                 else ans1+=s[l];
@@ -38,14 +37,14 @@ class Solution {
                 if(mp[s[r]] > 1)
                 {
                     mp[s[r]]--;
-                    cnt++;
+                    flag = true;
                 }
                 else ans2=s[r] + ans2;
                 r--;
             }
         }
         string ans = ans1+ans2;
-        if(cnt%2) reverse(ans.begin(), ans.end());
+        if(!flag) reverse(ans.begin(), ans.end());
         return ans;
     }
 };
