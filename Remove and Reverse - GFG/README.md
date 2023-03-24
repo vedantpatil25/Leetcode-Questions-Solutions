@@ -1,6 +1,6 @@
 # Remove and Reverse
 ## Medium
-<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a string&nbsp;<strong>S </strong>which consists of only lower case English alphabets, you have to perform the below&nbsp;operations:<br>
+<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a string&nbsp;<strong>S </strong>which consists of only lowercase English alphabets, you have to perform the below&nbsp;operations:<br>
 If the string <strong>S</strong> contains any repeating character, remove the first repeating&nbsp;character and reverse the string&nbsp;and again perform the above operation on the modified string, otherwise, you stop.<br>
 You have to find the final string.</span></p>
 
@@ -9,7 +9,7 @@ You have to find the final string.</span></p>
 <pre><span style="font-size:18px"><strong>Input:</strong> S = "abab"
 <strong>Output:</strong> ba
 <strong>Explanation:</strong>
-<strong>In 1st operation:</strong> The first non repeating 
+<strong>In 1st operation:</strong> The first repeating 
 character is a. After Removing the first 
 character, S = "bab". After Reversing the 
 string, S = "bab".
@@ -33,7 +33,7 @@ You don't need to read input or print anything. Your task is to complete the fun
 <strong>Expected Auxiliary Space:</strong>&nbsp;O(K), K &lt;= 26.</span></p>
 
 <p><span style="font-size:18px"><strong>Constraints:</strong><br>
-The string contains only lower case English alphabets.<br>
+The string contains only lowercase English alphabets.<br>
 1 <u>&lt;</u>&nbsp;|S|&nbsp;<u>&lt;</u>&nbsp;10<sup>5</sup><br>
 |S| denotes the length of the string S.</span></p>
 </div>
