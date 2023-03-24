@@ -8,26 +8,29 @@ using namespace std;
 class Solution
 {
     public:
+    
+    
+    bool binarysearch(vector<int>& nums,int s,int e,int target)
+    {
+        return binary_search(nums.begin(),nums.end(),target);            
+    }
+    
     //Function to search a given number in row-column sorted matrix.
-    bool search(vector<vector<int> > matrix, int n, int m, int x) 
+    bool search(vector<vector<int> > matrix, int n, int m, int target) 
     {
         // code here 
-        int i = 0, j = n-1;
-        while(i >= 0 && i < n && j >= 0 && j < n)
-        {
-            if(matrix[i][j] == x) return true;
-            
-            else if(matrix[i][j] < x)
-            {
-                i++;
-            }
-            else
-            {
-                j--;
-            }
-        }
-        return false;
+        for(int i=0; i<n ; i++)
+       {
+           if(target>=matrix[i][0] && target <=matrix[i][m-1])
+           {
+               if(binarysearch(matrix[i],0,m-1,target))
+                {
+                    return true;
+                }
+           }
+       }
         
+        return false;
     }
 };
 
