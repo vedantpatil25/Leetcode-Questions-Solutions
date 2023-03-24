@@ -7,44 +7,54 @@ using namespace std;
 //User function Template for C++
 class Solution {
   public:
-    string removeReverse(string s) {
+    string removeReverse(string S) {
         // code here
-        int l = 0;
-        int r = s.size()-1;
-        string ans1 = "";
-        string ans2 = "";
+        int n=S.size();
         
-        unordered_map<char, int>mp;
-        for(auto x: s) mp[x]++;
-        bool flag = true;
-        
-        while(l<=r)
-        {
-            if(flag)
-            {
-                if(mp[s[l]] > 1)
-                {
-                    mp[s[l]]--;
-                    flag = false;
-                    
-                }
-                else ans1+=s[l];
-                l++;
-                
-            }
-            else
-            {
-                if(mp[s[r]] > 1)
-                {
-                    mp[s[r]]--;
-                    flag = true;
-                }
-                else ans2=s[r] + ans2;
-                r--;
-            }
+        int i=0;
+        int j=n-1;
+        vector <int> vec(26,0);
+        for(char ch: S){
+            vec[ch-'a']++;
         }
-        string ans = ans1+ans2;
-        if(!flag) reverse(ans.begin(), ans.end());
+        bool can=true;
+        string ans="";
+        string ans1="";
+        vector <bool> vis(n,false);
+        while(i<=j)
+        {
+            if(can)
+            {
+                char ch=S[i];
+                if(vec[ch-'a']==1){
+                    vis[i]=true;
+                    i++;
+                }
+                else{
+                    i++;
+                    can=false;
+                }
+                vec[ch-'a']--;
+            }
+            else{
+                char ch=S[j];
+                if(vec[ch-'a']==1){
+                    vis[j]=true;
+                    j--;
+                }
+                else{
+                    j--;
+                    can=true;
+                }
+                vec[ch-'a']--;
+            }
+            
+        }
+        for(int i = 0 ; i <= n; i++)
+        {
+            if(vis[i] == true) ans += S[i];
+        }
+        if(!can) reverse(ans.begin(), ans.end());
         return ans;
     }
 };
