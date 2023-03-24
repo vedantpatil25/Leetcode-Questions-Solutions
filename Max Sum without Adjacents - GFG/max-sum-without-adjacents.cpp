@@ -6,25 +6,25 @@ using namespace std;
 
 // } Driver Code Ends
 //User function template for C++
+//User function template for C++
 class Solution{
 public:	
 	// calculate the maximum sum with out adjacent
-	int solve(int ind , int *arr, vector<int>&dp)
+	int helper(int ind , int arr[], vector<int>&dp)
 	{
 	    if(ind == 0 ) return arr[ind];
-	    if(ind < 0) return 0;
-	    
 	    if(dp[ind] != -1) return dp[ind];
 	    
-	    int pick = arr[ind] + solve(ind-2, arr, dp);
-	    int notPick = solve(ind-1, arr, dp);
-	    return dp[ind] = max(pick, notPick);
+	    int l = arr[ind] ;
+	    if(ind>1) l += helper(ind-2, arr, dp);
+	    int r = helper(ind-1, arr, dp);
+	    return dp[ind] = max(l, r);
 	}
 	
 	int findMaxSum(int *arr, int n) {
 	    // code here
 	    vector<int>dp(n+1 , -1);
-	    return solve(n-1 , arr , dp);
+	    return helper(n-1 , arr , dp);
 	}
 };
 
