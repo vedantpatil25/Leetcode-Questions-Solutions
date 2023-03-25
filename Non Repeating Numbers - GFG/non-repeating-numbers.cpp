@@ -12,21 +12,27 @@ public:
         int n = nums.size();
         int xorr = 0;
         for(auto x:nums) xorr^=x;
-        int setbitpos = 0;
+        // int setbitpos = 0;
         
-        while(xorr)
-        {
-            if(xorr&1) break;
-            setbitpos++;
-            xorr = xorr>>1;
-        }
+        
+        // finding pos of last set bit
+        
+        // while(xorr)
+        // {
+        //     if(xorr&1) break;
+        //     setbitpos++;
+        //     xorr = xorr>>1;
+        // }
+        
+        //find pos of last set bit in O(1)
+        int setbitpos = xorr & ~(xorr-1);
         
         int num1 = 0;
         int num2 = 0;
 
         for(int i = 0 ; i < n ; i++)
         {
-            if(nums[i] & (1 << setbitpos) ) num1 ^= nums[i];
+            if(nums[i] & (setbitpos) ) num1 ^= nums[i];
             else num2 ^= nums[i];
         }
         if(num1 > num2)
