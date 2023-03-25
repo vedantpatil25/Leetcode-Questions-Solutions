@@ -8,21 +8,32 @@ class Solution
 public:
     vector<int> singleNumber(vector<int> nums) 
     {
-       vector<int> ans;
-       unordered_map<int,int> m;
-       for(int i=0;i<nums.size();i++)
-       {
-           m[nums[i]]++;
-       }
-       for(auto i: m)
-       {
-           if(i.second==1)
-           {
-               ans.push_back(i.first);
-           }
-       }
-       sort(ans.begin(),ans.end());
-       return ans;
+        // Code here.
+        int n = nums.size();
+        int xorr = 0;
+        for(auto x:nums) xorr^=x;
+        int setbitpos = 0;
+        
+        while(xorr)
+        {
+            if(xorr&1) break;
+            setbitpos++;
+            xorr = xorr>>1;
+        }
+        
+        int num1 = 0;
+        int num2 = 0;
+
+        for(int i = 0 ; i < n ; i++)
+        {
+            if(nums[i] & (1 << setbitpos) ) num1 ^= nums[i];
+            else num2 ^= nums[i];
+        }
+        if(num1 > num2)
+        {
+            return  {num2, num1};
+        }
+        return {num1, num2} ;
     }
 };
 
