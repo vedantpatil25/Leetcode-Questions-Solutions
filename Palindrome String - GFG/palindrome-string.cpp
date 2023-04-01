@@ -14,7 +14,7 @@ public:
         if(r-l <= 1) return s[l] == s[r];
 
         if(s[l] != s[r]) return false;
-        return helper(s, l+1, r-1);
+        return helper(s, ++l, --r);
     }
 	
 	int isPalindrome(string s)
@@ -25,6 +25,7 @@ public:
 	}
 
 };
+
 
 //{ Driver Code Starts.
 
