@@ -39,50 +39,54 @@ Instructions -
     3. Every chocolate in shop is arranged in increasing order
             i.e. shop.get(i) <= shop.get(i + 1) for all 0 <= i < n - 1
 */
+#define ll long long
 class Solution{
     public:
+    
     Shop shop;
     Solution(Shop s)
     {
         this->shop = s;
     }
-    
-    long long find (long  n, long k){
-        if(k == 0) return 0;
-        long long ans = 0;
-        long long  low = 0 , high = n-1;
-        long long mid_val = -1;
-        long long mid;
-        while(low<=high){
-            mid = (low+high)/2;
-            mid_val = shop.get(mid);
-            if(mid_val == k){
-                k = 0;
-                ans++;
-                return ans;
+    long long find(int n, long k){
+        // Return the number of chocolates Geek had
+        // enjoyed out of 'n' chocolates availabe in the
+        // 'shop'.
+        ll l = 0;
+        ll r = n-1;
+        ll ans = 0;
+        
+        while(r >= 0 && k>0)
+        {
+            ll index = -1;
+            ll ind_val;
+            while(l <= r)
+            {
+                ll mid = (r-l)/2 + l;
+                ll mid_val = shop.get(mid);
+                
+                if(mid_val <= k)
+                {
+                    index = mid;
+                    ind_val = mid_val;
+                    l = mid+1;
+                }
+                else
+                {
+                    r = mid -1;
+                }
             }
-            else if(mid_val < k){
-                low = mid+1;
-            }
-            else{
-                high = mid-1;
-            }
-        }
-        if(mid_val == -1) return 0;
-        if(mid_val > k && mid > 0){
-            int cur = shop.get(mid-1);
-            ans += k/cur;
-            k -= (k/cur)*cur;
-        }
-        else if(mid_val > k && mid == 0) return 0;
-        else if(mid_val < k){
-            ans += k/mid_val;
-            k -= (k/mid_val)*mid_val;
-        }
-        return ans + find(mid,k);
-    }
-};
+            ans += (k/ind_val);
+            k = k%ind_val;
+            
+            r = index -1;
+            l = 0;
 
+        }
+        return ans;
+    }
+
+};
 
 //{ Driver Code Starts.
 
