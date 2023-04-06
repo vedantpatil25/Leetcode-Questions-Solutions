@@ -7,6 +7,8 @@ using namespace std;
 // } Driver Code Ends
 //User function Template for C++
 
+//User function Template for C++
+
 class Solution{   
 public:
     int addMinChar(string str){    
@@ -15,8 +17,8 @@ public:
         int l = 0;
         int r = n - 1;
         
-        int ans = 0;
-        int temp = r;
+        int lastnotequal = r;
+        
         while(l <= r)
         {
             if(str[l] == str[r])
@@ -26,16 +28,16 @@ public:
             }
             else
             {
-                ans++;
+                lastnotequal--;
                 l = 0;
-                temp--;
-                r  = temp;
+                r = lastnotequal;
             }
         }
-        return ans;
+        return (n - 1 - lastnotequal);
         
     }
 };
+
 
 //{ Driver Code Starts.
 
