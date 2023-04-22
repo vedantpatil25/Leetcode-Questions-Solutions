@@ -19,21 +19,23 @@ return 0;
 }
 // } Driver Code Ends
 
-int t[1001][1001];
+int memo[1001][1001];
+   
+   int lcs(int x, int y , string &s1 , string &s2 )
+    {
+        if(x == 0 || y == 0 ) return 0;
 
-int LPS(string &s1, string &s2, int m, int n){
-    if(m == 0 || n == 0) return 0;
+        if(memo[x][y] != -1) return memo[x][y];
+        
+        if(s1[x-1] == s2[y-1]) return 1 + lcs(x-1, y-1, s1,s2);
+        else return memo[x][y] = max(lcs(x-1, y, s1,s2), lcs(x, y-1, s1,s2));
     
-    if(t[m][n] != -1) return t[m][n];
-    
-    if(s1[m-1] == s2[n-1]) return t[m][n] = 1 + LPS(s1, s2, m-1, n-1);
-    else return t[m][n] = max(LPS(s1, s2, m-1, n), LPS(s1, s2, m, n-1));
-}
+    }
 
-int minDeletions(string str, int n) { 
-    memset(t, -1, sizeof(t));
-    
-    string b = string(str.rbegin(), str.rend());
-    
-    return n - LPS(str, b, n, n);
+    int minDeletions(string a, int n) { 
+        memset(memo, -1, sizeof(memo));
+        string b = string(a.rbegin() , a.rend());
+        // int n = a.size();
+        int m = n;
+        return  n - lcs(n, m, a, b);
 } 
