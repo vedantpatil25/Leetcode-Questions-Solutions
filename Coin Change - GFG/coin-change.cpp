@@ -3,31 +3,22 @@
 using namespace std;
 
 // } Driver Code Ends
+
 class Solution {
-  private:
-    // sum, start => ans
-    vector<vector<long long int>> cache;
   public:
-    Solution() {
-        cache = vector<vector<long long int>>(1001, vector<long long int>(1001, -1));
-    }
-
-    long long int count(int coins[], int N, int sum, int start = 0) {
-        //base
-        if(sum == 0) return 1;
-        if(sum < 0) return 0;
-        
-        if(cache[sum][start] >= 0) return cache[sum][start];
-
-        // sub problwms
-        long long int ans = 0;
-        for(int i = start; i < N; ++i) {
-            ans += count(coins, N, sum - coins[i], i);
+    long long int count(int coins[], int N, int sum) {
+        // code here.
+         vector<long long> dp(sum + 1, 0);
+        dp[0] = 1;
+        for (int i = 0; i < N; ++i) {
+            for (int j = coins[i]; j <= sum; ++j) {
+                dp[j] += dp[j - coins[i]];
+            }
         }
-        
-        return cache[sum][start] = ans;
+        return dp[sum];
     }
 };
+
 
 //{ Driver Code Starts.
 int main() {
