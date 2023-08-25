@@ -8,24 +8,21 @@ using namespace std;
 //User function template for C++
 class Solution{
 public:	
-	bool helper(string &s, int l,int r)
-    {
-        // cout<<l<<" "<<r<<endl;
-        if(r-l <= 1) return s[l] == s[r];
-
-        if(s[l] != s[r]) return false;
-        return helper(s, ++l, --r);
-    }
 	
-	int isPalindrome(string s)
+	
+	int isPalindrome(string S)
 	{
 	    // Your code goes here
-	    int n = s.size();
-        return helper(s,0 ,n-1);
+	    
+	    int temp = 1;
+	    int sz = S.size();
+	    for(int i = 0 ; i < (sz/2) ; i++){
+	        if(S[i] != S[sz-1-i]) temp = 0;
+	    }
+	    return temp;
 	}
 
 };
-
 
 //{ Driver Code Starts.
 
