@@ -118,21 +118,20 @@ public:
     {
         queue<pair<int,Node*>>q;
         q.push({1,root});
-        int ans=0;
+        int ans =  0;
         while(!q.empty()){
-            int n=q.size();
-            
-            for(int i=0;i<n;i++){
-                auto t=q.front();
+            int n = q.size();
+            while(n--){
+                auto top = q.front();
                 q.pop();
-                auto temp=t.second;
-                if(temp->left==NULL && temp->right==NULL && k>=t.first){
-                    k-=t.first;
+                auto temp = top.second;
+                if(temp->left == NULL && temp->right == NULL && k >= top.first){
+                    k -= top.first;
                     ans++;
                 }
-                if(k<=0) break;
-                if(temp->left) q.push({t.first+1,temp->left});
-                if(temp->right) q.push({t.first+1,temp->right});
+                if(k <= 0) break;
+                if(temp->left) q.push({top.first+1,temp->left});
+                if(temp->right) q.push({top.first+1,temp->right});
             }
          
         }
