@@ -11,21 +11,24 @@ using namespace std;
 class Solution
 {
     public:
-    vector<vector<int> > subsets(vector<int>& A)
-    {
-        //code here
-        int n = A.size();
-        vector<vector<int>>ans;
-        for(int i = 0 ; i < (1<<n) ; i++)
-        {
-            vector<int>temp;
-            for(int j = 0 ; j < n ; j++)
-            {
-                if(i & (1<<j)) temp.push_back(A[j]);
-            }
-            ans.push_back(temp);
-        }
+      void findSubset(int ind, vector<int>&nums, vector<int>&v, vector<vector<int>>&ans)
+  {
+        if(v.size() == 0) ans.push_back(v);
+        if(ind == nums.size()) return;
         
+        for(int i = ind ; i < nums.size() ; i++)
+        {
+            v.push_back(nums[i]);
+            ans.push_back(v);
+            findSubset(i+1, nums, v, ans);
+            v.pop_back();
+        }
+  }
+    vector<vector<int> > subsets(vector<int>& nums){
+        //code here
+        vector<int>v;
+        vector<vector<int>>ans;
+        findSubset(0, nums, v, ans);
         sort(ans.begin(), ans.end());
         return ans;
     }
