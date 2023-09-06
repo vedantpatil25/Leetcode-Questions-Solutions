@@ -6,30 +6,24 @@ using namespace std;
 class Solution
 {
 	public:
-	    void solve(string S, int ind , set<string>&temp)
-	    {
-	        if(ind == S.size())
-	        {
-	            temp.insert(S);
-	            return;
+	    void solve(int ind, string &S, set<string>&st){
+	        if(ind == S.size() ){
+	            st.insert(S);
+	        }
+	        for(int i = ind ; i < S.size() ; i++){
+	            swap(S[i], S[ind]);
+	            solve(ind+1, S, st);
+	            swap(S[i], S[ind]);
 	        }
 	        
-	        for(int i = ind ; i < S.size(); i++)
-	        {
-	            swap(S[ind], S[i]);
-	            solve(S, ind+1, temp);
-	            swap(S[ind], S[i]);
-	        }
 	    }
-	
-	
 		vector<string>find_permutation(string S)
 		{
 		    // Code here there
-		    set<string>temp;
-		    solve(S, 0, temp);
-		    
-		    vector<string>ans(temp.begin(), temp.end());
+		    set<string>st;
+		    solve(0, S, st);
+		    vector<string>ans(st.begin(), st.end());
+		    sort(ans.begin(), ans.end());
 		    return ans;
 		}
 };
@@ -46,6 +40,7 @@ int main(){
 	    cin >> S;
 	    Solution ob;
 	    vector<string> ans = ob.find_permutation(S);
+	    sort(ans.begin(),ans.end());
 	    for(auto i: ans)
 	    {
 	    	cout<<i<<" ";
