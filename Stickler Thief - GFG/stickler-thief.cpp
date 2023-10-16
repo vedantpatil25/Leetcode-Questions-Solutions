@@ -4,44 +4,25 @@ using namespace std;
 typedef long long int ll;
 
 // } Driver Code Ends
-c
-lass Solution
+class Solution
 {
     public:
     //Function to find the maximum money the thief can get.
-    
-    int solve(vector<int>arr)
-	{
-	    int n = arr.size();
-	    int prev = 0;
-	    int prev2 = arr[0];
-	    for(int i = 1 ; i < n ; i++)
-	    {
-	        int take = arr[i];
-	        if(i>1) take += prev2;
-	        int notTake = prev;
-	        int curr = max(take, notTake);
-	        
-	        prev2 = prev;
-	        prev = curr;
-	    }
-	    return prev;
-	}
-	
-    int FindMaxSum(int arr[], int n)
-    {
+    int solve(int ind, int arr[], vector<int>&dp){
+        if(dp[ind] != -1) return dp[ind];
+        if(ind == 0) return arr[ind];
+        if(ind < 0) return 0;
+        int pick = solve(ind-2, arr, dp) + arr[ind];
+        int notPick = solve(ind-1, arr, dp);
+        
+        return dp[ind] = max(pick, notPick);
+    }
+    int FindMaxSum(int arr[], int n){
         // Your code here
-        if(n == 1) return arr[0];
-        vector<int> temp1,temp2;
-        for(int i =0 ; i < n ; i++)
-        {
-            if(i != 0 ) temp1.push_back(arr[i]);
-            if(i != n-1 ) temp2.push_back(arr[i]);
-        }
-	    return max( solve(temp1) ,  solve(temp2) );
+        vector<int>dp(n,-1);
+        return solve(n-1, arr, dp);
     }
 };
-
 
 //{ Driver Code Starts.
 int main()
